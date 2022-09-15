@@ -1,0 +1,94 @@
+#  Copyright (c) 2022 Jacob Evans
+#  License: MIT
+#
+#     ___                 _       _____
+#    |_  |               | |     |  ___|
+#      | | __ _  ___ ___ | |__   | |____   ____ _ _ __  ___
+#      | |/ _` |/ __/ _ \| '_ \  |  __\ \ / / _` | '_ / __|
+#  /\__/ / (_| | (_| (_) | |_) | | |___\ V / (_| | | | \__ \
+#  \____/ \__,_|\___\___/|_.__/  \____/ \_/ \__,_|_| |_|___/
+#
+#  Website: https://jwevans.dev    Email: jacob@jwevans.dev
+#
+#  GitHub: https://github.com/jwevans21
+#  GitLab: https://gitlab.com/jwevans
+#  Gitea: https://gitea.com/jwevans
+#  Codeberg: https://codeberg.org/jwevans
+#  Bitbucket: https://bitbucket.org/jwevans21
+
+"$schema" = 'https://starship.rs/config-schema.json'
+
+add_newline = true
+
+format = """
+$shell $username$hostname($fill$battery)
+[╭─────────────────⟶](bold green) $time
+[│ ](bold green)$directory(\n[│ ](bold green)$git_branch$git_commit $git_status)
+[╰──⟶ ](bold green)"""
+
+right_format = """$cmd_duration"""
+
+continuation_prompt = "[╰──➔ ](bold green)"
+
+[shell]
+disabled = false
+bash_indicator = "bsh"
+fish_indicator = "fsh"
+zsh_indicator = "zsh"
+powershell_indicator = "psh"
+cmd_indicator = "cmd"
+unknown_indicator = "unknown_shell"
+
+[username]
+show_always = true
+format = "[${user}]($style)"
+
+[hostname]
+ssh_only = false
+format = "[@${hostname}${ssh_symbol}]($style)"
+#ssh_symbol = " 🌐"
+
+[fill]
+symbol = " "
+
+[battery]
+format = "[$symbol $percentage]($style)"
+charging_symbol = "(blink) "
+
+[[battery.display]]
+threshold = 10
+style = "red bold"
+
+[[battery.display]]
+threshold = 30
+style ="green bold"
+
+[[battery.display]]
+threshold = 100
+style ="bright-green bold"
+
+[time]
+disabled = false
+format = "🕠 [$time]($style)"
+time_format = "%A %B %d @ %H:%M:%S"
+utc_time_offset = "-7"
+
+[git_status]
+up_to_date = "✓"
+ahead = "⇡${ahead_count}"
+behind = "⇣${behind_count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+
+[git_branch]
+disabled = false
+format = "[$symbol$branch(:$remote_branch)]($style) "
+
+[git_commit]
+format = "[(@$hash$tag)]($style)"
+only_detached = false
+
+[cmd_duration]
+min_time = 0
+show_milliseconds = true
+format = "[](yellow)[$duration](bg:yellow fg:bright-white)[█](yellow)"
+
